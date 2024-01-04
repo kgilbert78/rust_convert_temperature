@@ -4,6 +4,7 @@ fn main() {
     println!("Welcome to the Temperature Conversion App! Would you like to:");
     println!("(1) convert from Fahrenheit to Celsius");
     println!("(2) convert from Celsius to Fahrenheit");
+    println!("Enter 1 or 2:");
 
     let mut selection = String::new();
     let mut convert_from = "Fahrenheit";
@@ -20,12 +21,10 @@ fn main() {
 
     let mut temperature = String::new();
     io::stdin().read_line(&mut temperature).expect("failed to read line");
-
-    // try shadowing later
-    let temperature_float: f32 = temperature.trim().parse().unwrap();
+    let temperature: f32 = temperature.trim().parse().unwrap(); // shadowing
     // trim to remove the newline character from stdin!
     
-    let converted_temperature = convert(temperature_float, convert_to);
+    let converted_temperature = convert(temperature, convert_to);
     
     println!("{} {}", converted_temperature, convert_to);
     // need error handling for bad input and loop with match to continue prompting on error

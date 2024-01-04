@@ -10,10 +10,13 @@ fn main() {
     let mut convert_to = "Celcius";
 
     io::stdin().read_line(&mut selection).expect("failed to read line");
+    println!("selection: {}, convert to: {}", selection, convert_to);
 
     if selection == "2" {
         convert_from = "Celcius";
         convert_to = "Fahrenheit";
+        println!("selection: {}, convert to: {}", selection, convert_to);
+
     }
 
     println!("Please enter a temperature to convert from {} to {}:", convert_from, convert_to);
@@ -22,34 +25,26 @@ fn main() {
     io::stdin().read_line(&mut temperature).expect("failed to read line");
 
     // try shadowing later
-    let temperature_float: f32 = temperature.trim().parse().unwrap(); // calling parse on an error value here somehow
+    let temperature_float: f32 = temperature.trim().parse().unwrap();
     // trim to remove the newline character from stdin!
+    
+    let converted_temperature = convert(temperature_float, convert_to);
+    
+    println!("{} {}", converted_temperature, convert_to);
 
-    // try switch statement later
-    if convert_to == "Celcius" {
-        fahrenheit_to_celsius(temperature_float);
-    } else if convert_to == "Fahrenheit" {
-        celsius_to_fahrenheit(temperature_float);
-    } else {
-        println!("Error")
-    }
-
-    // make this work above conditional function call
     io::stdin().read_line(&mut temperature).expect("failed to read line");
     // need error handling for bad input and loop with match to continue prompting on error
 }
 // Convert temperatures between Fahrenheit and Celsius. 
 // Formulas are C = (F - 32) * 5/9 and F = (C * 9/5) + 32.
-fn fahrenheit_to_celsius(input: f32) -> f32{
-    let minus_32 = input - 32.0;
-    let result = minus_32 * 0.5555555556;
-    println!("{result}"); // remove here and assign function to variable to print result
-    result
-}
-
-fn celsius_to_fahrenheit(input: f32) -> f32 {
-    let nine_fifths = input * 0.5555555556;
-    let result = nine_fifths + 32.0;
-    println!("{result}"); // remove here and assign function to variable to print result
+fn convert(input: f32, output_type: &str) -> f32 {
+    let mut result = input;
+    if output_type == "Celcius" {
+        let minus_32 = input - 32.0;
+        result = minus_32 * 0.5555555556;
+    } else if output_type == "Fahrenheit" {
+        let nine_fifths = input * 0.5555555556;
+        result = nine_fifths + 32.0;
+    }
     result
 }

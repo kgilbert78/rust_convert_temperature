@@ -10,13 +10,10 @@ fn main() {
     let mut convert_to = "Celcius";
 
     io::stdin().read_line(&mut selection).expect("failed to read line");
-    println!("selection: {}, convert to: {}", selection, convert_to);
 
-    if selection == "2" {
+    if selection.trim() == "2" {
         convert_from = "Celcius";
         convert_to = "Fahrenheit";
-        println!("selection: {}, convert to: {}", selection, convert_to);
-
     }
 
     println!("Please enter a temperature to convert from {} to {}:", convert_from, convert_to);

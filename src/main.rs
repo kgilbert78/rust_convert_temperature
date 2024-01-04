@@ -28,10 +28,9 @@ fn main() {
     let converted_temperature = convert(temperature_float, convert_to);
     
     println!("{} {}", converted_temperature, convert_to);
-
-    io::stdin().read_line(&mut temperature).expect("failed to read line");
     // need error handling for bad input and loop with match to continue prompting on error
 }
+
 // Convert temperatures between Fahrenheit and Celsius. 
 // Formulas are C = (F - 32) * 5/9 and F = (C * 9/5) + 32.
 fn convert(input: f32, output_type: &str) -> f32 {
